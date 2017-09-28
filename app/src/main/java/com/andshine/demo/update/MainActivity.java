@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("ezy.update", "checking");
                 agent.setInfo("");
             }
-        }).setUrl(mCheckUrl).setWifiOnly(false).setManual(isManual).setNotifyId(notifyId).setParser(new IUpdateParser() {
+        }).setUrl(mCheckUrl).setWifiOnly(false).setVerifyMD5(false).setManual(isManual).setNotifyId(notifyId).setParser(new IUpdateParser() {
             @Override
             public UpdateInfo parse(String source) throws Exception {
                 UpdateInfo info = new UpdateInfo();

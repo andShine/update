@@ -67,6 +67,7 @@ public class UpdateManager {
         private byte[] mPostData;
         private boolean mIsManual;
         private boolean mIsWifiOnly;
+        private boolean mIsVerifyMD5;
         private int mNotifyId = 0;
 
         private OnDownloadListener mOnNotificationDownloadListener;
@@ -86,10 +87,12 @@ public class UpdateManager {
             mUrl = url;
             return this;
         }
+
         public Builder setPostData(@NonNull byte[] data) {
             mPostData = data;
             return this;
         }
+
         public Builder setPostData(@NonNull String data) {
             mPostData = data.getBytes(Charset.forName("UTF-8"));
             return this;
@@ -110,14 +113,21 @@ public class UpdateManager {
             return this;
         }
 
+        public Builder setVerifyMD5(boolean isVerifyMD5) {
+            mIsVerifyMD5 = isVerifyMD5;
+            return this;
+        }
+
         public Builder setParser(@NonNull IUpdateParser parser) {
             mParser = parser;
             return this;
         }
+
         public Builder setChecker(@NonNull IUpdateChecker checker) {
             mChecker = checker;
             return this;
         }
+
         public Builder setDownloader(@NonNull IUpdateDownloader downloader) {
             mDownloader = downloader;
             return this;
@@ -156,7 +166,7 @@ public class UpdateManager {
                 mUrl = UpdateUtil.toCheckUrl(mContext, sUrl, sChannel);
             }
 
-            UpdateAgent agent = new UpdateAgent(mContext, mUrl, mIsManual, mIsWifiOnly, mNotifyId);
+            UpdateAgent agent = new UpdateAgent(mContext, mUrl, mIsManual, mIsWifiOnly, mIsVerifyMD5, mNotifyId);
             if (mOnNotificationDownloadListener != null) {
                 agent.setOnNotificationDownloadListener(mOnNotificationDownloadListener);
             }

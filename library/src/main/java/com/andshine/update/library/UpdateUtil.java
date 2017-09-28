@@ -109,7 +109,7 @@ public class UpdateUtil {
     public static void install(Context context, boolean force) {
         String md5 = context.getSharedPreferences(PREFS, 0).getString(KEY_UPDATE, "");
         File apk = new File(context.getExternalCacheDir(), md5 + ".apk");
-        if (UpdateUtil.verify(apk, md5)) {
+        if (UpdateUtil.verify(apk, md5, false)) {
             install(context, apk, force);
         }
     }
@@ -130,7 +130,14 @@ public class UpdateUtil {
         }
     }
 
+    /**
+     * 默认验证md5
+     */
     public static boolean verify(File apk, String md5) {
+        return verify(apk, md5, true);
+    }
+
+    public static boolean verify(File apk, String md5, boolean isVerifyMD5) {
         if (!apk.exists()) {
             return false;
         }
@@ -138,9 +145,12 @@ public class UpdateUtil {
         if (TextUtils.isEmpty(_md5)) {
             return false;
         }
-        boolean result = _md5 != null && _md5.equalsIgnoreCase(md5);
-        if (!result) {
-            apk.delete();
+        boolean result = true;
+        if (isVerifyMD5) {
+            result = _md5.equalsIgnoreCase(md5);
+            if (!result) {
+                apk.delete();
+            }
         }
         return result;
     }
