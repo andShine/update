@@ -39,7 +39,8 @@ public class UpdateInfo {
     public String updateContent;
 
     public String url;
-    public String md5;
+    // 默认当前时间戳
+    public String md5 = String.valueOf(System.currentTimeMillis());
     public long size;
 
     public static UpdateInfo parse(String s) throws JSONException {

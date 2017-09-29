@@ -40,7 +40,6 @@ class UpdateAgent implements ICheckAgent, IUpdateAgent, IDownloadAgent {
     private File mApkFile;
     private boolean mIsManual = false;
     private boolean mIsWifiOnly = false;
-    private boolean mIsVerifyMD5 = false;
 
     private UpdateInfo mInfo;
     private UpdateError mError = null;
@@ -55,13 +54,11 @@ class UpdateAgent implements ICheckAgent, IUpdateAgent, IDownloadAgent {
     private OnDownloadListener mOnDownloadListener;
     private OnDownloadListener mOnNotificationDownloadListener;
 
-    public UpdateAgent(Context context, String url, boolean isManual, boolean isWifiOnly, boolean isVerifyMD5, int notifyId) {
+    public UpdateAgent(Context context, String url, boolean isManual, boolean isWifiOnly, int notifyId) {
         mContext = context.getApplicationContext();
         mUrl = url;
         mIsManual = isManual;
         mIsWifiOnly = isWifiOnly;
-        mIsVerifyMD5 = isVerifyMD5;
-
         mDownloader = new DefaultUpdateDownloader(mContext);
         mPrompter = new DefaultUpdatePrompter(context);
         mOnFailureListener = new DefaultFailureListener(context);
@@ -130,7 +127,7 @@ class UpdateAgent implements ICheckAgent, IUpdateAgent, IDownloadAgent {
     @Override
     public void update() {
         mApkFile = new File(mContext.getExternalCacheDir(), mInfo.md5 + ".apk");
-        if (UpdateUtil.verify(mApkFile, mInfo.md5, mIsVerifyMD5)) {
+        if (UpdateUtil.verify(mApkFile, mInfo.md5)) {
             doInstall();
         } else {
             doDownload();
@@ -236,7 +233,7 @@ class UpdateAgent implements ICheckAgent, IUpdateAgent, IDownloadAgent {
                 mTmpFile = new File(mContext.getExternalCacheDir(), info.md5);
                 mApkFile = new File(mContext.getExternalCacheDir(), info.md5 + ".apk");
 
-                if (UpdateUtil.verify(mApkFile, mInfo.md5, mIsVerifyMD5)) {
+                if (UpdateUtil.verify(mApkFile, mInfo.md5)) {
                     doInstall();
                 } else if (info.isSilent) {
                     doDownload();

@@ -4,7 +4,7 @@
 改自 [https://github.com/czy1121/update](https://github.com/czy1121/update)
 
 #### 不同的地方 ####
-1. 可设置跳过md5验证
+1. 跳过md5验证
 2. 待更新...
 
 ## 使用步骤 ##
@@ -17,5 +17,5 @@
 	}
 #### Step 2. Add the dependency ####
     dependencies {
-	        compile 'com.github.andShine:update:1.0.1'
+	        compile 'com.github.andShine:update:1.1.0'
 	}

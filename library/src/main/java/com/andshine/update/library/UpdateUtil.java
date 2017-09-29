@@ -109,7 +109,7 @@ public class UpdateUtil {
     public static void install(Context context, boolean force) {
         String md5 = context.getSharedPreferences(PREFS, 0).getString(KEY_UPDATE, "");
         File apk = new File(context.getExternalCacheDir(), md5 + ".apk");
-        if (UpdateUtil.verify(apk, md5, false)) {
+        if (UpdateUtil.verify(apk, md5)) {
             install(context, apk, force);
         }
     }
@@ -130,11 +130,8 @@ public class UpdateUtil {
         }
     }
 
-    /**
-     * 默认验证md5
-     */
     public static boolean verify(File apk, String md5) {
-        return verify(apk, md5, true);
+        return verify(apk, md5, false);
     }
 
     public static boolean verify(File apk, String md5, boolean isVerifyMD5) {
