@@ -17,5 +17,5 @@
 	}
 #### Step 2. Add the dependency ####
     dependencies {
-	        compile 'com.github.andShine:update:1.1.0'
+	        compile 'com.github.andShine:update:1.2.1'
 	}
