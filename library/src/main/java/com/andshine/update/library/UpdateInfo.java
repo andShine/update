@@ -30,6 +30,8 @@ public class UpdateInfo {
     public boolean isAutoInstall = true;
     // 是否可忽略该版本
     public boolean isIgnorable = true;
+    // 是否提示“已是最新版”
+    public boolean isShowMsg = true;
     // 一天内最大提示次数，<1时不限
     public int maxTimes = 0;
 
@@ -61,6 +63,7 @@ public class UpdateInfo {
         info.isForce = o.optBoolean("isForce", false);
         info.isAutoInstall = o.optBoolean("isAutoInstall", !info.isSilent);
         info.isIgnorable = o.optBoolean("isIgnorable", true);
+        info.isShowMsg = o.optBoolean("isShowMsg", true);
 
         info.versionCode = o.optInt("versionCode", 0);
         info.versionName = o.optString("versionName");

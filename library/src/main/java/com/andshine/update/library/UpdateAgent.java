@@ -194,7 +194,6 @@ class UpdateAgent implements ICheckAgent, IUpdateAgent, IDownloadAgent {
     }
 
 
-
     void doCheck() {
         new AsyncTask<String, Void, Void>() {
             @Override
@@ -223,7 +222,9 @@ class UpdateAgent implements ICheckAgent, IUpdateAgent, IDownloadAgent {
             if (info == null) {
                 doFailure(new UpdateError(UpdateError.CHECK_UNKNOWN));
             } else if (!info.hasUpdate) {
-                doFailure(new UpdateError(UpdateError.UPDATE_NO_NEWER));
+                if (info.isShowMsg) {
+                    doFailure(new UpdateError(UpdateError.UPDATE_NO_NEWER));
+                }
             } else if (UpdateUtil.isIgnore(mContext, info.md5)) {
                 doFailure(new UpdateError(UpdateError.UPDATE_IGNORED));
             } else {

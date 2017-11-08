@@ -5,7 +5,8 @@
 
 #### 不同的地方 ####
 1. 跳过md5验证
-2. 待更新...
+2. 可设置，是否提示“已经是最新版了”
+3. 待更新...
 
 ## 使用步骤 ##
 #### Step 1. Add the JitPack repository to your build file ####
@@ -17,5 +18,5 @@
 	}
 #### Step 2. Add the dependency ####
     dependencies {
-	        compile 'com.github.andShine:update:1.2.1'
+	        compile 'com.github.andShine:update:1.2.2'
 	}
